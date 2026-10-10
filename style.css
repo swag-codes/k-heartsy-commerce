@@ -1,0 +1,358 @@
+/* 1. Design tokens: reusable colours and values */
+:root {
+  --background: #100d16;
+  --surface: #191421;
+  --surface-light: #241b31;
+  --text: #f8f4ff;
+  --muted: #b7aebe;
+  --purple: #c29aff;
+  --pink: #f3b4dc;
+  --border: #35283f;
+}
+
+/* 2. Predictable sizing and page defaults */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 3. Announcement bar */
+.announcement {
+  padding: 8px 16px;
+  background: #24162f;
+  color: var(--pink);
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+
+/* 4. Header and navigation */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 20px 7%;
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.logo span {
+  color: var(--purple);
+}
+
+.navigation {
+  display: flex;
+  gap: 30px;
+}
+
+.navigation a,
+.cart-link {
+  color: var(--muted);
+  font-size: 14px;
+  transition: color 180ms ease;
+}
+
+.navigation a:hover,
+.cart-link:hover {
+  color: var(--purple);
+}
+
+.cart-count {
+  display: inline-grid;
+  place-items: center;
+  width: 23px;
+  height: 23px;
+  margin-left: 5px;
+  border-radius: 50%;
+  background: var(--surface-light);
+  color: var(--purple);
+}
+
+/* 5. Hero section */
+.hero {
+  padding: 110px 20px 100px;
+  text-align: center;
+  background:
+    radial-gradient(
+      ellipse at 50% 0%,
+      #382044 0%,
+      transparent 65%
+    );
+}
+
+.eyebrow {
+  margin: 0 0 14px;
+  color: var(--purple);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(40px, 7vw, 76px);
+  line-height: 1.1;
+  letter-spacing: -0.055em;
+}
+
+.hero h1 span {
+  color: var(--purple);
+}
+
+.hero-description {
+  max-width: 510px;
+  margin: 24px auto;
+  color: var(--muted);
+  font-size: 16px;
+}
+
+.primary-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+  padding: 13px 22px;
+  border: 1px solid var(--purple);
+  border-radius: 6px;
+  background: var(--purple);
+  color: #1a1022;
+  font-size: 14px;
+  font-weight: 700;
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.primary-button:hover {
+  transform: translateY(-2px);
+  background: #d4baff;
+}
+
+.hero-note {
+  margin-top: 24px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* 6. Product collection */
+.shop-section {
+  padding: 70px 7% 90px;
+}
+
+.section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 30px;
+}
+
+.section-heading h2,
+.about-section h2 {
+  margin: 0;
+  font-size: clamp(26px, 4vw, 38px);
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+}
+
+.section-note {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.product-card {
+  min-width: 0;
+}
+
+.product-art {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 4.5;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.art-purple {
+  background: linear-gradient(145deg, #49305f, #21162d);
+}
+
+.art-pink {
+  background: linear-gradient(145deg, #60364f, #291827);
+}
+
+.art-blue {
+  background: linear-gradient(145deg, #34446d, #191b32);
+}
+
+.product-symbol {
+  color: #f5eaff;
+  font-size: clamp(60px, 9vw, 112px);
+  text-shadow: 0 0 35px #d0a3ff55;
+  transition: transform 200ms ease;
+}
+
+.product-card:hover .product-symbol {
+  transform: scale(1.12) rotate(-6deg);
+}
+
+.product-label {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 5px 8px;
+  border: 1px solid #ffffff22;
+  border-radius: 3px;
+  background: #100d16aa;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+}
+
+.product-info {
+  padding: 15px 2px;
+}
+
+.product-category {
+  margin: 0 0 5px;
+  color: var(--purple);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+}
+
+.product-info h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.product-price {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* 7. About section and footer */
+.about-section {
+  padding: 65px 20px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+.about-section > p:last-child {
+  max-width: 510px;
+  margin: 20px auto 0;
+  color: var(--muted);
+}
+
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 28px 7%;
+  border-top: 1px solid var(--border);
+}
+
+.site-footer p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+/* 8. Responsive layout for mobile screens */
+@media (max-width: 700px) {
+  .site-header {
+    flex-wrap: wrap;
+    gap: 14px;
+    padding: 16px 5%;
+  }
+
+  .navigation {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  .hero {
+    padding: 80px 20px 70px;
+  }
+
+  .shop-section {
+    padding: 55px 5%;
+  }
+
+  .section-heading {
+    align-items: start;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 12px;
+  }
+
+  .product-info h3 {
+    font-size: 14px;
+  }
+
+  .site-footer {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 380px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 9. Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}
