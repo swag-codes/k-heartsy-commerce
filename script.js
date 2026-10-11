@@ -29,10 +29,29 @@ const products = [
   }
 ];
 
+
 const productGrid = document.querySelector("#product-grid");
+const searchInput = document.querySelector("#product-search");
+const categoryFilter = document.querySelector("#category-filter");
+const resultsMessage = document.querySelector("#results-message");
 
 function renderProducts() {
-  productGrid.innerHTML = products.map(product => `
+  const searchTerm = searchInput.value.trim().toLowerCase();
+  const selectedCategory = categoryFilter.value;
+
+  const filteredProducts = products.filter(product => {
+    const matchesSearch =
+      product.name.toLowerCase().includes(searchTerm) ||
+      product.category.toLowerCase().includes(searchTerm);
+
+    const matchesCategory =
+      selectedCategory === "all" ||
+      product.category === selectedCategory;
+
+    return matchesSearch && matchesCategory;
+  });
+
+  productGrid.innerHTML = filteredProducts.map(product => `
     <article class="product-card">
       <div class="product-art ${product.theme}">
         <span class="product-symbol" aria-hidden="true">
@@ -48,6 +67,14 @@ function renderProducts() {
       </div>
     </article>
   `).join("");
+
+  resultsMessage.textContent =
+    filteredProducts.length === 0
+      ? "No products found. Try another search."
+      : `${filteredProducts.length} product(s) found`;
 }
+
+searchInput.addEventListener("input", renderProducts);
+categoryFilter.addEventListener("change", renderProducts);
 
 renderProducts();

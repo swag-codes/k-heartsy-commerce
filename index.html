@@ -66,6 +66,25 @@
 
         <p class="section-note">Find your next favourite.</p>
       </div>
+
+<div class="shop-controls">
+  <input
+    type="search"
+    id="product-search"
+    placeholder="Search accessories..."
+    aria-label="Search products"
+  >
+
+  <select id="category-filter" aria-label="Filter by category">
+    <option value="all">All categories</option>
+    <option value="Decoden">Decoden</option>
+    <option value="Phone Charms">Phone Charms</option>
+    <option value="Keychains">Keychains</option>
+  </select>
+</div>
+
+<p id="results-message" class="results-message" aria-live="polite"></p>
+
     <div class="product-grid" id="product-grid"></div>
     </section>
 
