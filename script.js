@@ -7,6 +7,7 @@ const products = [
     price: 399,
     symbol: "✿",
     label: "HANDMADE",
+    image: "k-heartsy-commerce/images/purple-dream-toploader.png",
     theme: "art-purple"
   },
   {
@@ -16,6 +17,7 @@ const products = [
     price: 249,
     symbol: "♡",
     label: "BESTSELLER",
+    image: "k-heartsy-commerce/images/sweetheart-charm.png",
     theme: "art-pink"
   },
   {
@@ -25,9 +27,11 @@ const products = [
     price: 299,
     symbol: "✧",
     label: "FAN FAVOURITE",
+    image: "k-heartsy-commerce/images/midnight-star-keychain.png",
     theme: "art-blue"
   }
 ];
+
 
 let cart = JSON.parse(localStorage.getItem("k-heartsy-cart")) || [];
 const productGrid = document.querySelector("#product-grid");
@@ -54,11 +58,20 @@ function renderProducts() {
   productGrid.innerHTML = filteredProducts.map(product => `
     <article class="product-card">
       <div class="product-art ${product.theme}">
-        <span class="product-symbol" aria-hidden="true">
+  ${
+    product.image
+      ? `<img
+          class="product-image"
+          src="${product.image}"
+          alt="${product.name}"
+        >`
+      : `<span class="product-symbol" aria-hidden="true">
           ${product.symbol}
-        </span>
-        <span class="product-label">${product.label}</span>
-      </div>
+        </span>`
+  }
+
+  <span class="product-label">${product.label}</span>
+</div>
 
       <div class="product-info">
         <p class="product-category">${product.category}</p>
