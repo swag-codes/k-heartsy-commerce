@@ -4,6 +4,12 @@ A responsive e-commerce storefront for K-Heartsy, a handmade accessories brand i
 
 The project showcases a product collection, interactive shopping bag, persistent cart state, and a demo checkout experience, built with HTML, CSS, and JavaScript.
 
+## Live Demo
+
+**[View K-Heartsy Commerce](https://swag-codes.github.io/k-heartsy-commerce/)**
+
+Explore the live storefront, browse products, filter categories, manage the shopping bag, and try the demo checkout.
+
 ## Preview
 
 ### Desktop Homepage
