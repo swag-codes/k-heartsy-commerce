@@ -1,120 +1,188 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>K-Heartsy | Cute Things, Made with Love</title>
+    <title>K-Heartsy | Cute Things, Made with Love</title>
 
-  <meta
-    name="description"
-    content="Discover handmade K-pop and anime-inspired accessories at K-Heartsy."
-  >
+    <meta
+      name="description"
+      content="Discover handmade K-pop and anime-inspired accessories at K-Heartsy."
+    />
 
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
-</head>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="announcement">Handmade with love ♡ Made for your fandom</div>
 
-<body>
-  <div class="announcement">
-    Handmade with love ♡ Made for your fandom
-  </div>
-
-  <header class="site-header">
-    <a class="logo" href="#" aria-label="K-Heartsy home">
-      K-<span>Heartsy</span>
-    </a>
-
-    <nav class="navigation" aria-label="Main navigation">
-      <a href="#home">Home</a>
-      <a href="#shop">Shop</a>
-      <a href="#about">Our Story</a>
-    </nav>
-
-    <a class="cart-link" href="#cart">
-      Bag <span class="cart-count">0</span>
-    </a>
-  </header>
-
-  <main>
-    <section class="hero" id="home">
-      <p class="eyebrow">A LITTLE MAGIC, HANDMADE</p>
-
-      <h1>
-        Your fandom.<br>
-        Your <span>kind of magic.</span>
-      </h1>
-
-      <p class="hero-description">
-        Cute little treasures, dreamy charms and handmade
-        accessories made to match your personality.
-      </p>
-
-      <a class="primary-button" href="#shop">
-        Explore the collection <span aria-hidden="true">↗</span>
+    <header class="site-header">
+      <a class="logo" href="#" aria-label="K-Heartsy home">
+        K-<span>Heartsy</span>
       </a>
 
-      <p class="hero-note">♡ Handmade accessories for your everyday joy</p>
-    </section>
+      <nav class="navigation" aria-label="Main navigation">
+        <a href="#home">Home</a>
+        <a href="#shop">Shop</a>
+        <a href="#about">Our Story</a>
+      </nav>
 
-    <section class="shop-section" id="shop">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">MADE FOR YOUR COLLECTION</p>
-          <h2>Little things, big love.</h2>
+      
+<a href="#cart" class="cart-link">
+  <svg
+    class="bag-icon"
+    xmlns="http://www.w3.org/2000/svg"
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.8"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M5 8h14l1 13H4L5 8Z" />
+    <path d="M9 8V6a3 3 0 0 1 6 0v2" />
+  </svg>
+  Bag <span class="cart-count">0</span>
+</a>
+
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <p class="eyebrow">A LITTLE MAGIC, HANDMADE</p>
+
+        <h1>
+          Your fandom.<br />
+          Your <span>kind of magic.</span>
+        </h1>
+
+        <p class="hero-description">
+          Cute little treasures, dreamy charms and handmade accessories made to
+          match your personality.
+        </p>
+
+        <a class="primary-button" href="#shop">
+          Explore the collection <span aria-hidden="true">↗</span>
+        </a>
+
+        <p class="hero-note">♡ Handmade accessories for your everyday joy</p>
+      </section>
+
+      <section class="shop-section" id="shop">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">MADE FOR YOUR COLLECTION</p>
+            <h2>Little things, big love.</h2>
+          </div>
+
+          <p class="section-note">Find your next favourite.</p>
         </div>
 
-        <p class="section-note">Find your next favourite.</p>
+        <div class="shop-controls">
+          <input
+            type="search"
+            id="product-search"
+            placeholder="Search accessories..."
+            aria-label="Search products"
+          />
+
+          <select id="category-filter" aria-label="Filter by category">
+            <option value="all">All categories</option>
+            <option value="Decoden">Decoden</option>
+            <option value="Phone Charms">Phone Charms</option>
+            <option value="Keychains">Keychains</option>
+          </select>
+        </div>
+
+        <p id="results-message" class="results-message" aria-live="polite"></p>
+
+        <div class="product-grid" id="product-grid"></div>
+      </section>
+
+      <section class="cart-section" id="cart">
+        <p class="eyebrow">YOUR COLLECTION</p>
+        <h2>Your Shopping Bag</h2>
+
+        <div id="cart-items">
+          <p>Your bag is empty for now.</p>
+        </div>
+
+        <p class="cart-total">
+          Subtotal: <strong id="cart-subtotal">₹0</strong>
+        </p>
+
+        <button
+          class="primary-button checkout-button"
+          id="checkout-button"
+          type="button"
+          disabled
+        >
+          Proceed to Checkout →
+        </button>
+
+        <p id="checkout-message" aria-live="polite"></p>
+      </section>
+
+      <section class="about-section" id="about">
+        <p class="eyebrow">A LITTLE ABOUT US</p>
+        <h2>Made for the things you love.</h2>
+        <p>
+          K-Heartsy celebrates creativity, fandom and the joy of finding
+          something that feels uniquely yours.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a class="logo" href="#home">K-<span>Heartsy</span></a>
+      <p>Made with ♡ for your little universe.</p>
+      <p>© 2026 K-Heartsy · Portfolio project</p>
+    </footer>
+    <dialog class="product-modal" id="product-modal">
+      <button
+        class="modal-close"
+        id="modal-close"
+        type="button"
+        aria-label="Close product details"
+      >
+        &times;
+      </button>
+
+      <div id="modal-content"></div>
+    </dialog>
+
+    <dialog id="checkout-modal" class="product-modal">
+      <button
+        type="button"
+        class="modal-close"
+        id="checkout-close"
+        aria-label="Close checkout"
+      >
+        &times;
+      </button>
+
+      <div id="checkout-content">
+        <p class="eyebrow">ALMOST YOURS</p>
+        <h2>Order summary</h2>
+        <div id="checkout-items"></div>
+        <p class="cart-total">Total: <strong id="checkout-total">₹0</strong></p>
+        <button type="button" class="primary-button" id="place-demo-order">
+          Place Demo Order
+        </button>
+        <button
+  type="button"
+  class="continue-shopping"
+  id="continue-shopping"
+  hidden
+>
+  Continue Shopping
+</button>
+        <p class="section-note">Demo only — no payment will be collected.</p>
       </div>
-
-<div class="shop-controls">
-  <input
-    type="search"
-    id="product-search"
-    placeholder="Search accessories..."
-    aria-label="Search products"
-  >
-
-  <select id="category-filter" aria-label="Filter by category">
-    <option value="all">All categories</option>
-    <option value="Decoden">Decoden</option>
-    <option value="Phone Charms">Phone Charms</option>
-    <option value="Keychains">Keychains</option>
-  </select>
-</div>
-
-<p id="results-message" class="results-message" aria-live="polite"></p>
-
-    <div class="product-grid" id="product-grid"></div>
-    </section>
-
-    <section class="cart-section" id="cart">
-  <p class="eyebrow">YOUR COLLECTION</p>
-  <h2>Your Shopping Bag</h2>
-
-  <div id="cart-items">
-    <p>Your bag is empty for now.</p>
-  </div>
-
-  <p class="cart-total">
-    Subtotal: <strong id="cart-subtotal">₹0</strong>
-  </p>
-</section>
-
-    <section class="about-section" id="about">
-      <p class="eyebrow">A LITTLE ABOUT US</p>
-      <h2>Made for the things you love.</h2>
-      <p>
-        K-Heartsy celebrates creativity, fandom and the joy of
-        finding something that feels uniquely yours.
-      </p>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <a class="logo" href="#home">K-<span>Heartsy</span></a>
-    <p>Made with ♡ for your little universe.</p>
-    <p>© 2026 K-Heartsy · Portfolio project</p>
-  </footer>
-</body>
+    </dialog>
+  </body>
 </html>

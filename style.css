@@ -85,6 +85,20 @@ a {
   color: var(--purple);
 }
 
+.cart-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+
+.bag-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+
 .cart-count {
   display: inline-grid;
   place-items: center;
@@ -540,3 +554,284 @@ a {
   height: 100%;
   object-fit: cover;
 }
+.product-card {
+  cursor: pointer;
+  transition: transform 180ms ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+}
+
+.product-card:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 4px;
+}
+
+.product-modal {
+  position: fixed;
+  width: min(900px, 92vw);
+  max-width: 900px;
+  max-height: 85vh;
+  padding: 32px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--background);
+  color: var(--text);
+  overflow-y: auto;
+}
+
+.product-modal[open] {
+  display: block;
+}
+
+.product-modal::backdrop {
+  background: rgb(10 6 15 / 75%);
+  backdrop-filter: blur(5px);
+}
+
+.modal-close {
+  display: block;
+  margin-left: auto;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 12px;
+  background: transparent;
+  color: var(--text);
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.modal-product {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 28px;
+  align-items: center;
+}
+
+.modal-product img {
+  display: block;
+  width: 100%;
+  max-height: 460px;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.modal-product h2 {
+  margin: 8px 0 12px;
+}
+
+.modal-product p {
+  line-height: 1.7;
+}
+
+.modal-product .modal-price {
+  color: var(--purple);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+@media (max-width: 600px) {
+  .product-modal {
+    padding: 20px;
+  }
+
+  .modal-product {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .modal-product img {
+    max-height: 280px;
+  }
+}
+
+.checkout-button {
+  display: block;
+  width: fit-content;
+  margin: 28px 0 0 auto;
+  cursor: pointer;
+}
+
+.checkout-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+#checkout-message {
+  margin-top: 16px;
+  text-align: right;
+  color: var(--purple);
+}
+
+/* Continue Shopping button */
+.secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 22px;
+  border: 1px solid var(--purple);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.secondary-button:hover {
+  background: var(--purple);
+  color: #160d20;
+  transform: translateY(-2px);
+}
+
+.secondary-button:focus-visible {
+  outline: 2px solid var(--pink);
+  outline-offset: 3px;
+}
+
+.secondary-button[hidden] {
+  display: none;
+}
+
+/* Checkout action buttons */
+#checkout-content #place-demo-order,
+#checkout-content .continue-shopping {
+  min-height: 46px;
+  padding: 12px 22px;
+  border: 1px solid var(--purple);
+  border-radius: 10px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* Primary action */
+#checkout-content #place-demo-order {
+  background: var(--purple);
+  color: #160d20;
+}
+
+/* Secondary action */
+#checkout-content .continue-shopping {
+  background: transparent;
+  color: var(--text);
+}
+
+/* Subtle primary hover */
+#checkout-content #place-demo-order:hover {
+  background: #d8baff;
+  border-color: #d8baff;
+  box-shadow: 0 4px 16px rgba(194, 153, 255, 0.18);
+}
+
+/* Elegant secondary hover */
+#checkout-content .continue-shopping:hover {
+  background: rgba(194, 153, 255, 0.10);
+  color: var(--purple);
+  border-color: #d8baff;
+}
+
+/* Keyboard accessibility */
+#checkout-content button:focus-visible {
+  outline: 2px solid #e1caff;
+  outline-offset: 3px;
+}
+
+/* Add-to-bag toast notification */
+.cart-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  z-index: 9999;
+
+  width: max-content;
+  max-width: calc(100vw - 32px);
+  padding: 14px 20px;
+
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--purple);
+  border-radius: 12px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
+
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(-50%, 12px);
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    visibility 0.25s ease;
+}
+
+.cart-toast.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+@media (max-width: 480px) {
+  .cart-toast {
+    bottom: 18px;
+    padding: 12px 16px;
+    font-size: 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cart-toast {
+    transition: none;
+  }
+}
+
+
+/* Subtle shopping bag count animation */
+@keyframes bag-pop {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 transparent;
+  }
+
+  45% {
+    transform: scale(1.2);
+    box-shadow: 0 0 6px rgba(194, 154, 255, 0.25);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+.cart-count {
+  display: inline-grid;
+  place-items: center;
+  width: 23px;
+  height: 23px;
+  margin-left: 5px;
+  border-radius: 50%;
+  background: var(--surface-light);
+  color: var(--purple);
+  transform-origin: center;
+}
+
+.cart-count.animate {
+  animation: bag-pop 450ms ease;
+}
+
+
