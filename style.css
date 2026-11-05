@@ -834,4 +834,14 @@ a {
   animation: bag-pop 450ms ease;
 }
 
+@media (max-width: 600px) {
+  .quantity-controls button {
+    min-width: 44px;
+    min-height: 44px;
+  }
 
+  .checkout-button {
+    width: 100%;
+    justify-content: center;
+  }
+}

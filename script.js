@@ -37,11 +37,37 @@ const products = [
   },
 ];
 
-let cart = JSON.parse(localStorage.getItem("k-heartsy-cart")) || [];
+function loadCart() {
+  try {
+    const saved = JSON.parse(localStorage.getItem("k-heartsy-cart") || "[]");
+    if (!Array.isArray(saved)) return [];
+
+    return saved.flatMap((item) => {
+      const product = products.find(
+        (product) => product.id === Number(item.id),
+      );
+      const quantity = Number(item.quantity);
+
+      if (!product || !Number.isInteger(quantity) || quantity < 1) return [];
+
+      return [{ ...product, quantity }];
+    });
+  } catch {
+    return [];
+  }
+}
+
+let cart = loadCart();
 const productGrid = document.querySelector("#product-grid");
 const searchInput = document.querySelector("#product-search");
 const categoryFilter = document.querySelector("#category-filter");
 const resultsMessage = document.querySelector("#results-message");
+for (const category of new Set(products.map((product) => product.category))) {
+  const option = document.createElement("option");
+  option.value = category;
+  option.textContent = category;
+  categoryFilter.append(option);
+}
 
 
 let toastTimer;
@@ -80,11 +106,16 @@ function renderProducts() {
   const searchTerm = searchInput.value.trim().toLowerCase();
   const selectedCategory = categoryFilter.value;
 
-  const filteredProducts = products.filter((product) => {
-    const matchesSearch =
-      product.name.toLowerCase().includes(searchTerm) ||
-      product.category.toLowerCase().includes(searchTerm);
+    const filteredProducts = products.filter((product) => {
+    const searchableText = [
+      product.name,
+      product.category,
+      product.description,
+    ]
+      .join(" ")
+      .toLowerCase();
 
+    const matchesSearch = searchableText.includes(searchTerm);
     const matchesCategory =
       selectedCategory === "all" || product.category === selectedCategory;
 
@@ -114,7 +145,15 @@ function renderProducts() {
       <div class="product-info">
         <p class="product-category">${product.category}</p>
         <h3>${product.name}</h3>
-        <p class="product-price">₹${product.price}</p>
+                <p class="product-price">₹${product.price}</p>
+
+        <button
+          class="view-product"
+          type="button"
+          data-view-product="${product.id}"
+        >
+          View details
+        </button>
 
         <button class="add-to-cart" data-product-id="${product.id}">
           Add to Bag +
@@ -259,13 +298,10 @@ function openProductModal(product) {
 }
 
 productGrid.addEventListener("click", (event) => {
-  // Let the existing cart handler handle Add to Bag buttons.
-  if (event.target.closest(".add-to-cart")) return;
+  const button = event.target.closest("[data-view-product]");
+  if (!button) return;
 
-  const card = event.target.closest(".product-card");
-  if (!card) return;
-
-  const productId = Number(card.dataset.productId);
+  const productId = Number(button.dataset.viewProduct);
   const product = products.find((item) => item.id === productId);
 
   if (product) {
@@ -372,25 +408,43 @@ const continueShopping = document.querySelector("#continue-shopping");
 checkoutButton.addEventListener("click", () => {
   if (cart.length === 0) return;
 
-  checkoutItems.innerHTML = cart.map(item => `
-    <div class="cart-item">
-      <span>${item.name} × ${item.quantity}</span>
-      <strong>₹${item.price * item.quantity}</strong>
-    </div>
-  `).join("");
+  resetCheckoutState();
+  checkoutItems.replaceChildren();
+
+  for (const item of cart) {
+    const row = document.createElement("div");
+    row.className = "cart-item";
+
+    const label = document.createElement("span");
+    label.textContent = `${item.name} × ${item.quantity}`;
+
+    const price = document.createElement("strong");
+    price.textContent = `₹${item.price * item.quantity}`;
+
+    row.append(label, price);
+    checkoutItems.append(row);
+  }
 
   const total = cart.reduce(
     (sum, item) => sum + item.price * item.quantity,
-    0
+    0,
   );
 
   checkoutTotal.textContent = `₹${total}`;
   checkoutModal.showModal();
 });
 
+function resetCheckoutState() {
+  placeDemoOrder.disabled = false;
+  placeDemoOrder.textContent = "Place Demo Order";
+  continueShopping.hidden = true;
+}
+
 checkoutClose.addEventListener("click", () => {
   checkoutModal.close();
 });
+
+checkoutModal.addEventListener("close", resetCheckoutState);
 
 
 placeDemoOrder.addEventListener("click", () => {
